@@ -17,25 +17,25 @@
     gather_facts_ssh_keys: "{{ gather_facts_ssh_keys|default([]) + [ {'ssh_key_type': item.split(' ')[1], 'ssh_key_value': item.split(' ')[2]} ] }}"
   loop: "{{ gather_facts_host_keys.stdout_lines }}"
 
-- name: Dump the gather_facts_ssh_facts_dir variable
-  debug:
-    var: gather_facts_ssh_facts_dir
+#- name: Dump the gather_facts_ssh_facts_dir variable
+#  debug:
+#    var: gather_facts_ssh_facts_dir
 
-- name: Dump the gather_facts_destination variable
-  debug:
-    var: gather_facts_destination
+#- name: Dump the gather_facts_destination variable
+#  debug:
+#    var: gather_facts_destination
 
-- name: Dump the gather_facts_domain_dir
-  debug:
-    var: gather_facts_domain_dir
+#- name: Dump the gather_facts_domain_dir
+#  debug:
+#    var: gather_facts_domain_dir
 
 - name: Set the ansible SSH facts output directory
   set_fact:
     gather_facts_ssh_dir: "{{ gather_facts_ssh_facts_dir | default(gather_facts_destination) | default('facts') }}/{{ gather_facts_domain_dir | default('') }}"
 
-- name: Dump the gather_facts_ssh_dir
-  debug:
-    var: gather_facts_ssh_dir
+#- name: Dump the gather_facts_ssh_dir
+#  debug:
+#    var: gather_facts_ssh_dir
 
 - name: Ensure the SSH facts output directory exists
   file:
