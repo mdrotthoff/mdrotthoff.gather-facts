@@ -5,11 +5,21 @@
 
 # build_domain_directory tasks file for mdrotthoff.gather-facts
 
-- name: Build a list of the domain name components
+- name: Set the default domain directory
   set_fact:
-    gather_facts_domain_name_list: "{{ ansible_domain.split('.') }}"
+    gather_facts_domain_dir: "{{ ansible_domain }}"
 
-- name: Build the domain directory name (in reverse order)
-  set_fact:
-    gather_facts_domain_dir: "{{ item }}/{{ gather_facts_domain_dir | default('') }}"
-  loop: "{{ gather_facts_domain_name_list }}"
+- name: Build the domain directory tree
+  block:
+  - name: Build a list of the domain name components
+    set_fact:
+      gather_facts_domain_name_list: "{{ ansible_domain.split('.') }}"
+      gather_facts_domain_dir: ''
+
+  - name: Build the domain directory name (in reverse order)
+    set_fact:
+      gather_facts_domain_dir: "{{ item }}/{{ gather_facts_domain_dir | default('') }}"
+    loop: "{{ gather_facts_domain_name_list }}"
+  when:
+  - gather_facts_domain_tree is defined
+  - gather_facts_domain_tree
