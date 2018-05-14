@@ -39,8 +39,9 @@
   become:      false
 
 - name: Format the host facts to an output JSON file
-  shell:       "echo '{{ gather_facts_setup_results | to_nice_json }}' | python -mjson.tool >> {{ gather_facts_host_dir }}{{ ansible_fqdn }}.json"
-  when:        gather_facts_setup_results
-  connection:  local
-  become:      false
+  shell:        "echo '{{ gather_facts_setup_results | to_nice_json }}' | python -mjson.tool >> {{ gather_facts_host_dir }}{{ ansible_fqdn }}.json"
+  when:         gather_facts_setup_results
+  connection:   local
+  become:       false
+  ignore_errors: true
 
