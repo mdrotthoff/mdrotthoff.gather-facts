@@ -43,6 +43,7 @@
     state:     directory
     recurse:   true
   connection:  local
+  become:      false
 
 - name: Output the SSH key information to a YAML file
   template:
@@ -50,4 +51,6 @@
     dest:        "{{ gather_facts_ssh_dir }}{{ ansible_fqdn }}.ssh_keys.yml"
     mode:        '0444'
   connection:    local
+  become:        false
   when:          gather_facts_ssh_keys
+
