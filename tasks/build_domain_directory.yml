@@ -7,7 +7,7 @@
 
 - name: Set the default domain directory
   set_fact:
-    gather_facts_domain_dir: "{{ ansible_domain }}"
+    gather_facts_domain_dir: "{{ ansible_domain }}/"
 
 - name: Build the domain directory tree
   block:
@@ -23,3 +23,8 @@
   when:
   - gather_facts_domain_tree is defined
   - gather_facts_domain_tree
+
+#- name: Display the final domain directory name
+#  debug:
+#    var: gather_facts_domain_dir
+
