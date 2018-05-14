@@ -1,0 +1,43 @@
+---
+# $Author$
+# $Date$
+# $Source$
+
+# ansible_facts tasks file for mdrotthoff.gather-facts
+
+- name: Gather the host facts
+  setup:
+  register: gather_facts_setup_results
+  become:   true
+
+- name: Dump the gather_facts_host_facts_dir variable
+  debug:
+    var: gather_facts_host_facts_dir
+
+- name: Dump the gather_facts_destination variable
+  debug:
+    var: gather_facts_destination
+
+- name: Dump the gather_facts_domain_dir
+  debug:
+    var: gather_facts_domain_dir
+
+- name: Set the ansible fact output directory
+  set_fact:
+    gather_facts_host_dir: "{{ gather_facts_host_facts_dir | default(gather_facts_destination) | default('facts') }}/{{ gather_facts_domain_dir | default('') }}"
+
+- name: Dump the gather_facts_host_dir variable
+  debug:
+    var: gather_facts_host_dir
+
+- name: Ensure the host facts output directory exists
+  file:
+    path:      "{{ gather_facts_host_dir }}"
+    state:     directory
+    recurse:   true
+  connection:  local
+
+- name: Pretty format the output JSON file
+  shell:       "echo '{{ gather_facts_setup_results | to_nice_json }}' | python -mjson.tool >> {{ gather_facts_host_dir }}{{ ansible_fqdn }}.json"
+  when:        gather_facts_setup_results
+  connection:  local

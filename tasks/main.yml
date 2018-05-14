@@ -1,0 +1,28 @@
+---
+# $Author$
+# $Date$
+# $Source$
+
+# main tasks file for mdrotthoff.gather-facts
+
+- name: Build the domain name directory (if requested)
+  include_tasks: build_domain_directory.yml
+  when:
+  - gather_facts_domain_directory is defined
+  - gather_facts_domain_directory
+
+#- name: Display the built domain name
+#  debug:
+#    var: gather_facts_domain_dir
+
+- name: Output the host facts (if requested)
+  include_tasks: ansible_facts.yml
+  when:
+  - gather_facts_ansible_facts is defined
+  - gather_facts_ansible_facts
+
+- name: Output the host SSH key facts (if requested)
+  include_tasks: ssh_keys_facts.yml
+  when:
+  - gather_facts_ssh_key_facts is defined
+  - gather_facts_ssh_key_facts

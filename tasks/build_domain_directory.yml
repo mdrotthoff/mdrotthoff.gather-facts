@@ -1,0 +1,15 @@
+---
+# $Author$
+# $Date$
+# $Source$
+
+# build_domain_directory tasks file for mdrotthoff.gather-facts
+
+- name: Build a list of the domain name components
+  set_fact:
+    gather_facts_domain_name_list: "{{ ansible_domain.split('.') }}"
+
+- name: Build the domain directory name (in reverse order)
+  set_fact:
+    gather_facts_domain_dir: "{{ item }}/{{ gather_facts_domain_dir | default('') }}"
+  loop: "{{ gather_facts_domain_name_list }}"
