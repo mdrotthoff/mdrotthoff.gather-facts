@@ -23,8 +23,3 @@
   when:
   - gather_facts_domain_tree is defined
   - gather_facts_domain_tree
-
-#- name: Display the final domain directory name
-#  debug:
-#    var: gather_facts_domain_dir
-
