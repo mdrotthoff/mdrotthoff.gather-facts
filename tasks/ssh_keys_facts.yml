@@ -19,7 +19,7 @@
 
 - name: Create the ssh_key_output variable
   set_fact:
-    gather_facts_ssh_key_output: '[ "{{ ansible_fqdn }}": { "hostname": "{{ ansible_fqdn }}", "host_aliases": {{ ssh_key_aliases | default([]) }}, "ipv4_addresses": {{ ansible_all_ipv4_addresses | default([]) }}, "ipv6_addresses": {{ ansible_all_ipv6_addresses | default([]) }}, "ssh_keys": {{ gather_facts_ssh_keys | default([]) }} } ]'
+    gather_facts_ssh_key_output: '"{{ ansible_fqdn }}": { "hostname": "{{ ansible_fqdn }}", "host_aliases": {{ ssh_key_aliases | default([]) }}, "ipv4_addresses": {{ ansible_all_ipv4_addresses | default([]) }}, "ipv6_addresses": {{ ansible_all_ipv6_addresses | default([]) }}, "ssh_keys": {{ gather_facts_ssh_keys | default([]) }} }'
 
 - name: Set the ansible SSH facts output directory
   set_fact:
