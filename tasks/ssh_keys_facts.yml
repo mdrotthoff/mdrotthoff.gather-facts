@@ -32,7 +32,7 @@
 - name: Output the SSH key information to a YAML file
   template:
     src:         gather_facts_ssh_keys.j2
-    dest:        "{{ gather_facts_ssh_dir }}{{ ansible_fqdn }}.ssh_keys.yml"
+    dest:        "{{ gather_facts_ssh_dir }}{{ ansible_fqdn }}.ssh_keys.yaml"
     mode:        '0444'
   connection:    local
   become:        false

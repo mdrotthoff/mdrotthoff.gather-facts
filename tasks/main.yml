@@ -10,15 +10,23 @@
   when:
   - gather_facts_domain_directory is defined
   - gather_facts_domain_directory
+  tags:
+  - gather_facts
 
 - name: Output the host facts (if requested)
   include_tasks: ansible_facts.yml
   when:
   - gather_facts_ansible_facts is defined
   - gather_facts_ansible_facts
+  tags:
+  - gather_facts
+  - host_facts
 
 - name: Output the host SSH key facts (if requested)
   include_tasks: ssh_keys_facts.yml
   when:
   - gather_facts_ssh_key_facts is defined
   - gather_facts_ssh_key_facts
+  tags:
+  - gather_facts
+  - ssh_key_facts

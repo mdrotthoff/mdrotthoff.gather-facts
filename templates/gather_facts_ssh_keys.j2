@@ -27,3 +27,6 @@ ssh_key:
   key_value: '{{ gather_facts_ssh_key.ssh_key_value }}'
 {% endfor %}
 {% endif %}
+
+####
+{{ gather_facts_ssh_keys | to_nice_yaml }}
