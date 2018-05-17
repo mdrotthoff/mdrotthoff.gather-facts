@@ -29,9 +29,18 @@
   connection:  local
   become:      false
 
-- name: Output the SSH key information to a YAML file
+- name: Output the SSH key information to a JSON file
   template:
-    src:         gather_facts_ssh_keys.j2
+    src:         gather_facts_ssh_keys_json.j2
+    dest:        "{{ gather_facts_ssh_dir }}{{ ansible_fqdn }}.ssh_keys.json"
+    mode:        '0444'
+  connection:    local
+  become:        false
+  when:          gather_facts_ssh_keys
+
+- name: Output the SSH key information to a JSON file
+  template:
+    src:         gather_facts_ssh_keys_yaml.j2
     dest:        "{{ gather_facts_ssh_dir }}{{ ansible_fqdn }}.ssh_keys.yaml"
     mode:        '0444'
   connection:    local
