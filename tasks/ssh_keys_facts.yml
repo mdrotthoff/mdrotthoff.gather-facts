@@ -40,7 +40,10 @@
     mode:        '0444'
   connection:    local
   become:        false
-  when:          gather_facts_ssh_keys
+  when:
+  - gather_facts_ssh_key_output is defined
+  - gather_facts_ssh_facts_json is defined
+  - gather_facts_ssh_facts_json
 
 - name: Output the SSH key information to a JSON file
   template:
@@ -49,4 +52,8 @@
     mode:        '0444'
   connection:    local
   become:        false
-  when:          gather_facts_ssh_keys
+  when:
+  - gather_facts_ssh_key_output is defined
+  - gather_facts_ssh_facts_yaml is defined
+  - gather_facts_ssh_facts_yaml
+  
