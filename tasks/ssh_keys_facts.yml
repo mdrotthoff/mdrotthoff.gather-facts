@@ -17,6 +17,10 @@
     gather_facts_ssh_keys: "{{ gather_facts_ssh_keys|default([]) + [ {'ssh_key_type': item.split(' ')[1], 'ssh_key_value': item.split(' ')[2]} ] }}"
   loop: "{{ gather_facts_host_keys.stdout_lines }}"
 
+- name: Create the ssh_key_output variable
+  set_fact:
+    ssh_key_output: '[ "{{ ansible_fqdn }}", { "hostname": "{{ ansible_fqdn }}", "host_aliases": {{ ssh_key_aliases | default([]) }}, "ipv4_addresses": {{ ansible_all_ipv4_addresses | default([]) }}, "ipv6_addresses": {{ ansible_all_ipv6_addresses | default([]) }}, "ssh_keys": {{ gather_facts_ssh_keys | default([]) }} } ]'
+
 - name: Set the ansible SSH facts output directory
   set_fact:
     gather_facts_ssh_dir: "{{ gather_facts_ssh_facts_dir | default(gather_facts_destination) | default('facts') }}/{{ gather_facts_domain_dir | default('') }}"
