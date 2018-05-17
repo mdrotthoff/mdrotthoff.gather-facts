@@ -1,29 +1,4 @@
----
+# {{ ansible_managed }}
 # Host: {{ ansible_fqdn }}
-hostname: '{{ ansible_fqdn }}'
-aliases:
-- '{{ ansible_hostname }}'
-{% if ssh_key_aliases is defined %}
-{% for ssh_key_alias in ssh_key_aliases|sort %}
-- '{{ ssh_key_alias }}'
-{% endfor %}
-{% endif %}
-{% if ansible_all_ipv4_addresses is defined %}
-ipv4:
-{% for ipv4 in  ansible_all_ipv4_addresses|sort %}
-- '{{ ipv4 }}'
-{% endfor %}
-{% endif %}
-{% if ansible_all_ipv6_addresses is defined %}
-ipv6:
-{% for ipv6 in  ansible_all_ipv6_addresses|sort %}
-- '{{ ipv6 }}'
-{% endfor %}
-{% endif %}
-{% if gather_facts_ssh_keys is defined %}
-ssh_key:
-{% for gather_facts_ssh_key in  gather_facts_ssh_keys|sort %}
-- key_type:  '{{ gather_facts_ssh_key.ssh_key_type }}'
-  key_value: '{{ gather_facts_ssh_key.ssh_key_value }}'
-{% endfor %}
-{% endif %}
+---
+{{ gather_facts_ssh_key_output | to_nice_json }}
