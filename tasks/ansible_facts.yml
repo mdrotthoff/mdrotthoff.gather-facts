@@ -22,11 +22,21 @@
   connection:  local
   become:      false
 
-- name: Dump all vars
+- name: Dump all vars in JSON format
   template:
-    src:  gather_facts_host_facts.j2
+    src:  gather_facts_host_facts_json.j2
     dest: "{{ gather_facts_host_dir }}{{ ansible_fqdn }}.json"
   when:         gather_facts_setup_results
   connection:   local
   become:       false
   ignore_errors: true
+
+- name: Dump all vars in YAML format
+  template:
+    src:  gather_facts_host_facts_yaml.j2
+    dest: "{{ gather_facts_host_dir }}{{ ansible_fqdn }}.yaml"
+  when:         gather_facts_setup_results
+  connection:   local
+  become:       false
+  ignore_errors: true
+  
