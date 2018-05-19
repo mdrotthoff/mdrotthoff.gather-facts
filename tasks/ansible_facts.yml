@@ -25,7 +25,7 @@
 - name: Dump all vars in JSON format
   template:
     src:  gather_facts_host_facts_json.j2
-    dest: "{{ gather_facts_host_dir }}{{ ansible_fqdn }}.json"
+    dest: "{{ gather_facts_host_dir }}{{ inventory_hostname }}.json"
   connection:   local
   become:       false
   ignore_errors: true
@@ -37,7 +37,7 @@
 - name: Dump all vars in YAML format
   template:
     src:  gather_facts_host_facts_yaml.j2
-    dest: "{{ gather_facts_host_dir }}{{ ansible_fqdn }}.yaml"
+    dest: "{{ gather_facts_host_dir }}{{ inventory_hostname }}.yaml"
   connection:   local
   become:       false
   ignore_errors: true
@@ -45,4 +45,3 @@
   - gather_facts_setup_results is defined
   - gather_facts_host_facts_yaml is defined
   - gather_facts_host_facts_yaml
-  

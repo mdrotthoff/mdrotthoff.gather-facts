@@ -17,7 +17,7 @@
     gather_facts_ssh_keys: "{{ gather_facts_ssh_keys|default([]) + [ {'ssh_key_type': item.split(' ')[1], 'ssh_key_value': item.split(' ')[2]} ] }}"
   loop: "{{ gather_facts_host_keys.stdout_lines }}"
 
-- name: Create the ssh_key_output variable
+- name: Create the ssh_key_output variablefqdn
   set_fact:
     gather_facts_ssh_key_output: '{ "ssh_key_data": [ { "hostname": "{{ ansible_fqdn }}", "host_aliases": {{ ssh_key_aliases | default([]) }}, "ipv4_addresses": {{ ansible_all_ipv4_addresses | default([]) }}, "ipv6_addresses": {{ ansible_all_ipv6_addresses | default([]) }}, "ssh_keys": {{ gather_facts_ssh_keys | default([]) }} } ] }'
 
@@ -36,7 +36,7 @@
 - name: Output the SSH key information to a JSON file
   template:
     src:         gather_facts_ssh_keys_json.j2
-    dest:        "{{ gather_facts_ssh_dir }}{{ ansible_fqdn }}.ssh_keys.json"
+    dest:        "{{ gather_facts_ssh_dir }}{{ inventory_hostname }}.ssh_keys.json"
     mode:        '0444'
   connection:    local
   become:        false
@@ -48,7 +48,7 @@
 - name: Output the SSH key information to a JSON file
   template:
     src:         gather_facts_ssh_keys_yaml.j2
-    dest:        "{{ gather_facts_ssh_dir }}{{ ansible_fqdn }}.ssh_keys.yaml"
+    dest:        "{{ gather_facts_ssh_dir }}{{ inventory_hostname }}.ssh_keys.yaml"
     mode:        '0444'
   connection:    local
   become:        false
@@ -56,4 +56,3 @@
   - gather_facts_ssh_key_output is defined
   - gather_facts_ssh_facts_yaml is defined
   - gather_facts_ssh_facts_yaml
-  
