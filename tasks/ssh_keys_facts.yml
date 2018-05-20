@@ -31,7 +31,7 @@
 
 - name: Output the SSH key information to a YAML file
   template:
-    src:         ssh_keys_yaml.j2
+    src:         ssh_keys_facts_yaml.j2
     dest:        "{{ gather_facts_ssh_dir }}{{ inventory_hostname }}.ssh_keys.yaml"
     mode:        '0444'
   connection:    local

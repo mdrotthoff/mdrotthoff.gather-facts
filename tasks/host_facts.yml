@@ -36,7 +36,7 @@
 
 - name: Dump the host environment variables in YAML format
   template:
-    src:  host_environment_yaml.j2
+    src:  host_facts_environment_yaml.j2
     dest: "{{ gather_facts_host_dir }}{{ inventory_hostname }}.environment.yaml"
   connection:   local
   become:       false
@@ -48,7 +48,7 @@
 
 - name: Dump all group variables in YAML format
   template:
-    src:  host_groups_yaml.j2
+    src:  host_facts_groups_yaml.j2
     dest: "{{ gather_facts_host_dir }}{{ inventory_hostname }}.groups.yaml"
   connection:   local
   become:       false
@@ -60,7 +60,7 @@
 
 - name: Dump all host variables in YAML format
   template:
-    src:  host_vars_yaml.j2
+    src:  host_facts_host_vars_yaml.j2
     dest: "{{ gather_facts_host_dir }}{{ inventory_hostname }}.host-vars.yaml"
   connection:   local
   become:       false
@@ -72,7 +72,7 @@
 
 - name: Dump ansible variables in YAML format
   template:
-    src:  host_ansible_vars_yaml.j2
+    src:  host_facts_ansible_vars_yaml.j2
     dest: "{{ gather_facts_host_dir }}{{ inventory_hostname }}.ansible.yaml"
   connection:   local
   become:       false
