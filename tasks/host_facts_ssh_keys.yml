@@ -1,0 +1,44 @@
+---
+# $Author$
+# $Date$
+# $Source$
+
+# ssh_key_facts tasks file for mdrotthoff.gather-facts
+
+- name:  Scan and register the host ssh keys
+  command:      "ssh-keyscan {{ ansible_fqdn }}"
+  register:     gather_facts_host_keys
+  changed_when: false
+  connection:   local
+  check_mode:   false
+
+- name: Collect the SSH keys found
+  set_fact:
+    gather_facts_ssh_keys: "{{ gather_facts_ssh_keys|default([]) + [ {'ssh_key_type': item.split(' ')[1], 'ssh_key_value': item.split(' ')[2]} ] }}"
+  loop: "{{ gather_facts_host_keys.stdout_lines }}"
+
+- name: Create the SSH keys subdirectory if requested
+  block:
+
+  - name: Set the SSH keys output directory
+    set_fact:
+      gather_facts_ssh_keys_dir: 'ssh-keys/'
+
+  - name: Ensure the SSH keys output directory exists
+    file:
+      path:      "{{ gather_facts_output_dir }}{{ gather_facts_ssh_keys_dir }}"
+      state:     directory
+      recurse:   true
+    connection:  local
+    become:      false
+  when:
+  - gather_facts_directory_facts_type is defined
+  - gather_facts_directory_facts_type
+
+- name: Dump the SSH keys variables in YAML format
+  template:
+    src:         host_facts_ssh_keys_yaml.j2
+    dest:        "{{ gather_facts_output_dir }}{{ gather_facts_ssh_keys_dir | default('') }}{{ inventory_hostname }}.ssh-keys.yaml"
+  connection:    local
+  become:        false
+  ignore_errors: "{{ ansible_check_mode }}"

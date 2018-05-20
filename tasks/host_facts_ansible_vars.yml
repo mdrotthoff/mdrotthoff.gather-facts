@@ -1,0 +1,32 @@
+---
+# $Author$
+# $Date$
+# $Source$
+
+# host_facts_groups tasks file for mdrotthoff.gather-facts
+
+- name: Create the ansible facts subdirectory if requested
+  block:
+
+  - name: Set the ansible facts output directory
+    set_fact:
+      gather_facts_ansible_facts_dir: 'ansible-facts/'
+
+  - name: Ensure the ansible facts output directory exists
+    file:
+      path:      "{{ gather_facts_output_dir }}{{ gather_facts_ansible_facts_dir }}"
+      state:     directory
+      recurse:   true
+    connection:  local
+    become:      false
+  when:
+  - gather_facts_directory_facts_type is defined
+  - gather_facts_directory_facts_type
+
+- name: Dump the ansible facts variables in YAML format
+  template:
+    src:         host_facts_groups_yaml.j2
+    dest:        "{{ gather_facts_output_dir }}{{ gather_facts_ansible_facts_dir | default('') }}{{ inventory_hostname }}.ansible-facts.yaml"
+  connection:    local
+  become:        false
+  ignore_errors: "{{ ansible_check_mode }}"
