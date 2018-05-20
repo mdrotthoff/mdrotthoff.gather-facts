@@ -5,8 +5,10 @@
 
 # main tasks file for mdrotthoff.gather-facts
 
-- name: Build the domain name directory (if requested)
-  include_tasks: build_domain_directory.yml
+#- name: Build the domain name directory (if requested)
+- name: Set the default domain directory (if requested)
+  set_fact:
+    gather_facts_domain_dir: "{{ ansible_domain }}/"
   when:
   - gather_facts_domain_directory is defined
   - gather_facts_domain_directory
@@ -14,7 +16,7 @@
   - gather_facts
 
 - name: Output the host facts (if requested)
-  include_tasks: ansible_facts.yml
+  include_tasks: host_facts.yml
   when:
   - gather_facts_ansible_facts is defined
   - gather_facts_ansible_facts
