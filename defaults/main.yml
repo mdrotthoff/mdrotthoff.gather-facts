@@ -4,12 +4,12 @@
 # $Source$
 
 # defaults file for mdrotthoff.gather-facts
-gather_facts_ansible_facts:    true
-gather_facts_ssh_key_facts:    true
-gather_facts_domain_directory: true
-gather_facts_domain_tree:      false
-gather_facts_destination:      'facts'
-gather_facts_host_facts_dir:   "{{ gather_facts_destination | default('facts') }}/host-facts"
-gather_facts_ssh_facts_dir:    "{{ gather_facts_destination | default('facts') }}/ssh-facts"
-gather_facts_host_facts_yaml:  true
-gather_facts_ssh_facts_yaml:   true
+gather_facts_ansible_facts:      true
+gather_facts_ssh_key_facts:      true
+gather_facts_domain_directory:   true
+gather_facts_destination:        'facts'
+gather_facts_host_vars_facts:    true
+gather_facts_environment_facts:  true
+gather_facts_group_facts:        true
+gather_facts_ansible_vars_facts: true
+gather_facts_ssh_keys_facts:     true

@@ -5,30 +5,112 @@
 
 # main tasks file for mdrotthoff.gather-facts
 
-#- name: Build the domain name directory (if requested)
 - name: Set the default domain directory (if requested)
   set_fact:
     gather_facts_domain_dir: "{{ ansible_domain }}/"
   when:
-  - gather_facts_domain_directory is defined
-  - gather_facts_domain_directory
+  - gather_facts_directory_domain is defined
+  - gather_facts_directory_domain
   tags:
   - gather_facts
 
-- name: Output the host facts (if requested)
-  include_tasks: host_facts.yml
+- name: Set the output directory
+  set_fact:
+    gather_facts_output_dir: "{{ gather_facts_destination | default('facts') }}/{{ gather_facts_domain_dir | default('') }}"
+  tags:
+  - gather_facts
+
+- name: Ensure the output directory exists
+  file:
+    path:      "{{ gather_facts_output_dir }}"
+    state:     directory
+    recurse:   true
+  connection:  local
+  become:      false
+  tags:
+  - gather_facts
+
+- name: Dump the host environment variables in YAML format
+  template:
+    src:         host_facts_environment_yaml.j2
+    dest:        "{{ gather_facts_output_dir }}{{ inventory_hostname }}.environment.yaml"
+  connection:    local
+  become:        false
+  ignore_errors: "{{ ansible_check_mode }}"
   when:
-  - gather_facts_ansible_facts is defined
-  - gather_facts_ansible_facts
+  - gather_facts_environment_facts is defined
+  - gather_facts_environment_facts
   tags:
   - gather_facts
   - host_facts
 
-- name: Output the host SSH key facts (if requested)
-  include_tasks: ssh_keys_facts.yml
+- name: Dump all group variables in YAML format
+  template:
+    src:         host_facts_groups_yaml.j2
+    dest:        "{{ gather_facts_output_dir }}{{ inventory_hostname }}.groups.yaml"
+  connection:    local
+  become:        false
+  ignore_errors: "{{ ansible_check_mode }}"
   when:
-  - gather_facts_ssh_key_facts is defined
-  - gather_facts_ssh_key_facts
+  - gather_facts_group_facts is defined
+  - gather_facts_group_facts
+  tags:
+  - gather_facts
+  - host_facts
+
+- name: Dump all host variables in YAML format
+  template:
+    src:         host_facts_host_vars_yaml.j2
+    dest:        "{{ gather_facts_output_dir }}{{ inventory_hostname }}.host-vars.yaml"
+  connection:    local
+  become:        false
+  ignore_errors: "{{ ansible_check_mode }}"
+  when:
+  - gather_facts_host_vars_facts is defined
+  - gather_facts_host_vars_facts
+  tags:
+  - gather_facts
+  - host_facts
+
+- name: Dump the ansible variables in YAML format
+  template:
+    src:         host_facts_ansible_vars_yaml.j2
+    dest:        "{{ gather_facts_output_dir }}{{ inventory_hostname }}.ansible-vars.yaml"
+  connection:    local
+  become:        false
+  ignore_errors: "{{ ansible_check_mode }}"
+  when:
+  - gather_facts_ansible_vars_facts is defined
+  - gather_facts_ansible_vars_facts
+  tags:
+  - gather_facts
+  - host_facts
+
+- name: Process the host SSH keys
+  block:
+
+  - name: Scan and register the host ssh keys
+    command:      "ssh-keyscan {{ ansible_fqdn }}"
+    register:     gather_facts_host_keys
+    changed_when: false
+    connection:   local
+
+  - name: Collect the SSH keys found
+    set_fact:
+      gather_facts_ssh_keys: "{{ gather_facts_ssh_keys|default([]) + [ {'ssh_key_type': item.split(' ')[1], 'ssh_key_value': item.split(' ')[2]} ] }}"
+    loop:                    "{{ gather_facts_host_keys.stdout_lines }}"
+
+  - name: Output the SSH key information to a YAML file
+    template:
+      src:         ssh_keys_facts_yaml.j2
+      dest:        "{{ gather_facts_output_dir }}{{ inventory_hostname }}.ssh_keys.yaml"
+      mode:        '0444'
+    connection:    local
+    become:        false
+
+  when:
+  - gather_facts_ssh_keys_facts is defined
+  - gather_facts_ssh_keys_facts
   tags:
   - gather_facts
   - ssh_key_facts
