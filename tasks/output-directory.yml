@@ -8,8 +8,8 @@
 - name: Display the enter output-directory.yml message
   debug:
     msg: 'Enter output-directory.yml'
-#  tags:
-#  - debug
+  tags:
+  - debug
 
 - name: Set the default domain directory (if requested)
   set_fact:
@@ -39,5 +39,5 @@
 - name: Display the exit output-directory.yml message
   debug:
     msg: 'Exit output-directory.yml'
-#  tags:
-#  - debug
+  tags:
+  - debug

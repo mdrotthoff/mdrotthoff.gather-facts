@@ -8,8 +8,8 @@
 - name: Display the enter environment-facts.yml message
   debug:
     msg: 'Enter environment-facts.yml'
-#  tags:
-#  - debug
+  tags:
+  - debug
 
 - name: Create the base output directory
   include_tasks: output-directory.yml
@@ -36,7 +36,7 @@
   - gather_facts_directory_facts_type is defined
   - gather_facts_directory_facts_type
 
-- name: Dump the host environment variables in YAML format
+- name: Dump the environment facts in YAML format
   template:
     src:         host_facts_environment_yaml.j2
     dest:        "{{ gather_facts_output_dir }}{{ gather_facts_environment_dir | default('') }}{{ inventory_hostname }}.environment.yaml"
@@ -47,5 +47,5 @@
 - name: Display the exit environment-facts.yml message
   debug:
     msg: 'Exit environment-facts.yml'
-#  tags:
-#  - debug
+  tags:
+  - debug
