@@ -3,14 +3,27 @@
 # $Date$
 # $Source$
 
-# host_facts_groups tasks file for mdrotthoff.gather-facts
+# group-factss tasks file for mdrotthoff.gather-facts
+
+- name: Display the enter group-facts.yml message
+  debug:
+    msg: 'Enter group-facts.yml'
+#  tags:
+#  - debug
+
+- name: Create the base output directory
+  include_tasks: output-directory.yml
+  when:
+  - gather_facts_output_dir is not defined
+  tags:
+  - gather_facts
 
 - name: Create the groups facts subdirectory if requested
   block:
 
   - name: Set the groups output directory
     set_fact:
-      gather_facts_groups_dir: 'groups/'
+      gather_facts_groups_dir: 'group-facts/'
 
   - name: Ensure the groups output directory exists
     file:
@@ -30,3 +43,9 @@
   connection:    local
   become:        false
   ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Display the exit group-facts.yml message
+  debug:
+    msg: 'Exit group-facts.yml'
+#  tags:
+#  - debug

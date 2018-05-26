@@ -5,33 +5,39 @@
 
 # main tasks file for mdrotthoff.gather-facts
 
-- name: Set the default domain directory (if requested)
-  set_fact:
-    gather_facts_domain_dir: "{{ ansible_domain }}/"
-  when:
-  - gather_facts_directory_domain is defined
-  - gather_facts_directory_domain
-  tags:
-  - gather_facts
+#- name: Set the default domain directory (if requested)
+#  set_fact:
+#    gather_facts_domain_dir: "{{ ansible_domain }}/"
+#  when:
+#  - gather_facts_directory_domain is defined
+#  - gather_facts_directory_domain
+#  tags:
+#  - gather_facts
 
-- name: Set the output directory
-  set_fact:
-    gather_facts_output_dir: "{{ gather_facts_destination | default('facts') }}/{{ gather_facts_domain_dir | default('') }}"
-  tags:
-  - gather_facts
+#- name: Set the output directory
+#  set_fact:
+#    gather_facts_output_dir: "{{ gather_facts_destination | default('facts') }}/{{ gather_facts_domain_dir | default('') }}"
+#  tags:
+#  - gather_facts
 
-- name: Ensure the output directory exists
-  file:
-    path:      "{{ gather_facts_output_dir }}"
-    state:     directory
-    recurse:   true
-  connection:  local
-  become:      false
-  tags:
-  - gather_facts
+#- name: Ensure the output directory exists
+#  file:
+#    path:      "{{ gather_facts_output_dir }}"
+#    state:     directory
+#    recurse:   true
+#  connection:  local
+#  become:      false
+#  tags:
+#  - gather_facts
 
-- name: Output the host environment variables if requested
-  include_tasks: host_facts_environment.yml
+- name: Display the enter main.yml message
+  debug:
+    msg: 'Enter main.yml'
+#  tags:
+#  - debug
+
+- name: Output the environment facts if requested
+  include_tasks: environment-facts.yml
   when:
   - gather_facts_environment_facts is defined
   - gather_facts_environment_facts
@@ -39,8 +45,8 @@
   - gather_facts
   - host_enviroment_facts
 
-- name: Output the host group variables if requested
-  include_tasks: host_facts_groups.yml
+- name: Output the group facts if requested
+  include_tasks: group-facts.yml
   when:
   - gather_facts_group_facts is defined
   - gather_facts_group_facts
@@ -48,8 +54,8 @@
   - gather_facts
   - host_group_facts
 
-- name: Output the host variables if requested
-  include_tasks: host_facts_host_vars.yml
+- name: Output the host facts if requested
+  include_tasks: host-facts.yml
   when:
   - gather_facts_host_vars_facts is defined
   - gather_facts_host_vars_facts
@@ -57,8 +63,8 @@
   - gather_facts
   - host_group_facts
 
-- name: Output the ansible variables if requested
-  include_tasks: host_facts_ansible_vars.yml
+- name: Output the ansible facts if requested
+  include_tasks: ansible-facts.yml
   when:
   - gather_facts_ansible_vars_facts is defined
   - gather_facts_ansible_vars_facts
@@ -66,11 +72,17 @@
   - gather_facts
   - host_ansible_facts
 
-- name: Output the SSH key variables if requested
-  include_tasks: host_facts_ssh_keys.yml
+- name: Output the SSH facts if requested
+  include_tasks: ssh-facts.yml
   when:
   - gather_facts_ssh_keys_facts is defined
   - gather_facts_ssh_keys_facts
   tags:
   - gather_facts
   - host_ssh_keys_facts
+
+- name: Display the exit main.yml message
+  debug:
+    msg: 'Exit main.yml'
+#  tags:
+#  - debug

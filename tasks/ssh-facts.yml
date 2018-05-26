@@ -3,7 +3,20 @@
 # $Date$
 # $Source$
 
-# ssh_key_facts tasks file for mdrotthoff.gather-facts
+# ssh-facts tasks file for mdrotthoff.gather-facts
+
+- name: Display the enter ssh-facts.yml message
+  debug:
+    msg: 'Enter ssh-facts.yml'
+#  tags:
+#  - debug
+
+- name: Create the base output directory
+  include_tasks: output-directory.yml
+  when:
+  - gather_facts_output_dir is not defined
+  tags:
+  - gather_facts
 
 - name:  Scan and register the host ssh keys
   command:      "ssh-keyscan {{ ansible_fqdn }}"
@@ -42,3 +55,9 @@
   connection:    local
   become:        false
   ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Display the exit ssh-facts.yml message
+  debug:
+    msg: 'Exit ssh-facts.yml'
+#  tags:
+#  - debug

@@ -1,0 +1,43 @@
+---
+# $Author$
+# $Date$
+# $Source$
+
+# output-directory tasks file for mdrotthoff.gather-facts
+
+- name: Display the enter output-directory.yml message
+  debug:
+    msg: 'Enter output-directory.yml'
+#  tags:
+#  - debug
+
+- name: Set the default domain directory (if requested)
+  set_fact:
+    gather_facts_domain_dir: "{{ ansible_domain }}/"
+  when:
+  - gather_facts_directory_domain is defined
+  - gather_facts_directory_domain
+  tags:
+  - gather_facts
+
+- name: Set the output directory
+  set_fact:
+    gather_facts_output_dir: "{{ gather_facts_destination | default('facts') }}/{{ gather_facts_domain_dir | default('') }}"
+  tags:
+  - gather_facts
+
+- name: Ensure the output directory exists
+  file:
+    path:      "{{ gather_facts_output_dir }}"
+    state:     directory
+    recurse:   true
+  connection:  local
+  become:      false
+  tags:
+  - gather_facts
+
+- name: Display the exit output-directory.yml message
+  debug:
+    msg: 'Exit output-directory.yml'
+#  tags:
+#  - debug

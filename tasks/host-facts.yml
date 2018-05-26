@@ -3,14 +3,27 @@
 # $Date$
 # $Source$
 
-# host_facts_groups tasks file for mdrotthoff.gather-facts
+# host-facts tasks file for mdrotthoff.gather-facts
 
-- name: Create the host variables facts subdirectory if requested
+- name: Display the enter host-facts.yml message
+  debug:
+    msg: 'Enter host-facts.yml'
+#  tags:
+#  - debug
+
+- name: Create the base output directory
+  include_tasks: output-directory.yml
+  when:
+  - gather_facts_output_dir is not defined
+  tags:
+  - gather_facts
+
+- name: Create the host facts subdirectory if requested
   block:
 
   - name: Set the host variables output directory
     set_fact:
-      gather_facts_host_vars_dir: 'host-vars/'
+      gather_facts_host_vars_dir: 'host-facts/'
 
   - name: Ensure the host variables output directory exists
     file:
@@ -30,3 +43,9 @@
   connection:    local
   become:        false
   ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Display the exit host-facts.yml message
+  debug:
+    msg: 'Exit host-facts.yml'
+#  tags:
+#  - debug
