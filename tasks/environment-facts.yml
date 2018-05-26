@@ -10,6 +10,7 @@
     msg: 'Enter environment-facts.yml'
   tags:
   - debug
+  - never
 
 - name: Create the base output directory
   include_tasks: output-directory.yml
@@ -49,3 +50,4 @@
     msg: 'Exit environment-facts.yml'
   tags:
   - debug
+  - never

@@ -10,6 +10,7 @@
     msg: 'Enter ansible-facts.yml'
   tags:
   - debug
+  - never
 
 - name: Create the base output directory
   include_tasks: output-directory.yml
@@ -49,3 +50,4 @@
     msg: 'Exit ansible-facts.yml'
   tags:
   - debug
+  - never

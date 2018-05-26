@@ -10,6 +10,7 @@
     msg: 'Enter main.yml'
   tags:
   - debug
+  - never
 
 - name: Output the environment facts if requested
   include_tasks: environment-facts.yml
@@ -61,3 +62,4 @@
     msg: 'Exit main.yml'
   tags:
   - debug
+  - never

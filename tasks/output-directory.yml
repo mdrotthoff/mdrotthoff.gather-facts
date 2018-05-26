@@ -10,6 +10,7 @@
     msg: 'Enter output-directory.yml'
   tags:
   - debug
+  - never
 
 - name: Set the default domain directory (if requested)
   set_fact:
@@ -41,3 +42,4 @@
     msg: 'Exit output-directory.yml'
   tags:
   - debug
+  - never
