@@ -35,7 +35,7 @@
 
 - name: Display the individual ssh keys gathered
   debug:
-    var: "{{ gather_facts_ssh_keys|default([]) + [ {'ssh_key_type': item.split(' ')[1], 'ssh_key_value': item.split(' ')[2]} ] }}"
+    var: "{{ [ {'ssh_key_type': item.split(' ')[1], 'ssh_key_value': item.split(' ')[2]} ] }}"
   loop: "{{ gather_facts_ssh_key_data.stdout_lines }}"
 #  tags:
 #  - debug
