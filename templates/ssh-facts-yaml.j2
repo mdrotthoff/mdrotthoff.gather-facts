@@ -10,47 +10,36 @@ ssh_key_data;
 #}
 {% if ssh_key_data is defined %}
 {#    Variable ssh_key_data is defined #}
-#     Variable ssh_key_data is defined
 {%    if ssh_key_data.host_aliases is defined %}
 {#       Variable ssh_key_data.host_aliases is defined #}
-#        Variable ssh_key_data.host_aliases is defined
 {%       if ssh_key_data.host_aliases | length > 0 %}
 {#          Variable ssh_key_data.host_aliases has at least one entry #}
-#           Variable ssh_key_data.host_aliases has at least one entry
   host_aliases:
 {%          for host_alias in ssh_key_data.host_aliases %}
   - "{{ host_alias }}"
 {%          endfor %}
 {%       else %}
 {#          Variable ssh_key_data.host_aliases does not have any entries #}
-#           Variable ssh_key_data.host_aliases does not have any entries
   host_aliases: []
 {%       endif %}
 {%    elif inventory_hostname != inventory_hostname_short %}
 {#       Variable ssh_key_data.host_aliases is not defined #}
-#        Variable ssh_key_data.host_aliases is not defined
 {#       Variable inventory_hostname is not the same as inventory_hostname_short #}
-#        Variable inventory_hostname is not the same as inventory_hostname_short
   host_aliases:
   - "{{ inventory_hostname_short }}"
 {%    else %}
 {#       Variable ssh_key_data.host_aliases is not defined #}
-#        Variable ssh_key_data.host_aliases is not defined
 {#       Variable inventory_hostname is the same as inventory_hostname_short #}
-#        Variable inventory_hostname is the same as inventory_hostname_short
   host_aliases: []
 {%    endif %}
 {% else %}
 {#    Variable ssh_key_data is not defined #}
-#     Variable ssh_key_data is not defined
 {%    if inventory_hostname != inventory_hostname_short %}
 {#       Variable inventory_hostname is not the same as inventory_hostname_short #}
-#        Variable inventory_hostname is not the same as inventory_hostname_short
   host_aliases:
   - "{{ inventory_hostname_short }}"
 {%    else %}
 {#       Variable inventory_hostname is the same as inventory_hostname_short #}
-#        Variable inventory_hostname is the same as inventory_hostname_short
   host_aliases: []
 {%    endif %}
 {% endif %}
@@ -62,58 +51,44 @@ ssh_key_data;
 #}
 {% if ssh_key_data is defined %}
 {#    Variable ssh_key_data is defined #}
-#     Variable ssh_key_data is defined
 {%    if ssh_key_data.ipv4_addresses is defined %}
 {#       Variable ssh_key_data.ipv4_addresses is defined #}
-#        Variable ssh_key_data.ipv4_addresses is defined
 {%       if ssh_key_data.ipv4_addresses | length > 0 %}
 {#          Variable ssh_key_data.ipv4_addresses has at least one entry #}
-#           Variable ssh_key_data.ipv4_addresses has at least one entry
   ipv4_addresses:
 {%          for ipv4_address in ssh_key_data.ipv4_addresses %}
   - "{{ ipv4_address }}"
 {%          endfor %}
 {%       else %}
 {#          Variable ssh_key_data.ipv4_addresses does not have any entries #}
-#           Variable ssh_key_data.ipv4_addresses does not have any entries
   ipv4_addresses: []
 {%       endif %}
 {%    elif ansible_all_ipv4_addresses is defined %}
 {#       Variable ssh_key_data.ipv4_addresses is not defined #}
-#        Variable ssh_key_data.ipv4_addresses is not defined
 {#       Variable ansible_all_ipv4_addresses is defined #}
-#        Variable ansible_all_ipv4_addresses is defined
 {%       if ansible_all_ipv4_addresses | length > 0 %}
 {#          Variable ansible_all_ipv4_addresses has at least one entry #}
-#           Variable ansible_all_ipv4_addresses has at least one entry
   ipv4_addresses:
 {%          for ipv4_address in ansible_all_ipv4_addresses %}
   - "{{ ipv4_address }}"
 {%          endfor %}
 {%       else %}
 {#          Variable ansible_all_ipv4_addresses does not have any entries #}
-#           Variable ansible_all_ipv4_addresses does not have any entries
   ipv4_addresses: []
 {%       endif %}
 {%    else %}
 {#       Variable ssh_key_data.ipv4_addresses is not defined #}
-#        Variable ssh_key_data.ipv4_addresses is not defined
 {#       Variable ansible_all_ipv4_addresses is not defined #}
-#        Variable ansible_all_ipv4_addresses is not defined
   ipv4_addresses: []
 {%    endif %}
 {% elif ansible_all_ipv4_addresses is defined %}
 {#    Variable ssh_key_data is not defined #}
-#     Variable ssh_key_data is not defined
 {#    Variable ansible_all_ipv4_addresses is defined #}
-#     Variable ansible_all_ipv4_addresses is defined
 {%    if ansible_all_ipv4_addresses | length < 1 %}
 {#       Variable ansible_all_ipv4_addresses does not have any entries #}
-#        Variable ansible_all_ipv4_addresses does not have any entries
   ipv4_addresses: []
 {%    else %}
 {#       Variable ansible_all_ipv4_addresses has at least one entry #}
-#        Variable ansible_all_ipv4_addresses has at least one entry
   ipv4_addresses:
 {%       for ipv4_address in ansible_all_ipv4_addresses %}
   - "{{ ipv4_address }}"
@@ -121,7 +96,6 @@ ssh_key_data;
 {%    endif %}
 {% else %}
 {#    Variable ansible_all_ipv4_addresses is not defined #}
-#     Variable ansible_all_ipv4_addresses is not defined
   ipv4_addresses: []
 {% endif %}
 {#
@@ -132,17 +106,13 @@ ssh_key_data;
 #}
 {% if ssh_key_data is defined %}
 {#    Variable ssh_key_data is defined #}
-#     Variable ssh_key_data is defined
 {%    if ssh_key_data.ipv6_addresses is defined %}
 {#       Variable ssh_key_data.ipv6_addresses is defined #}
-#        Variable ssh_key_data.ipv6_addresses is defined
 {%       if ssh_key_data.ipv6_addresses | length < 1 %}
 {#          Variable ssh_key_data.ipv6_addresses does not have any entries #}
-#           Variable ssh_key_data.ipv6_addresses does not have any entries
   ipv6_addresses: []
 {%       else %}
 {#          Variable ssh_key_data.ipv6_addresses has at least one entry #}
-#           Variable ssh_key_data.ipv6_addresses has at least one entry
   ipv6_addresses:
 {%          for ipv6_address in ssh_key_data.ipv6_addresses %}
   - "{{ ipv6_address }}"
@@ -150,16 +120,12 @@ ssh_key_data;
 {%       endif %}
 {%    elif ansible_all_ipv6_addresses is defined %}
 {#       Variable ssh_key_data.ipv6_addresses is not defined #}
-#        Variable ssh_key_data.ipv6_addresses is not defined
 {#       Variable ansible_all_ipv6_addresses is defined #}
-#        Variable ansible_all_ipv6_addresses is defined
 {%       if ansible_all_ipv6_addresses | length < 1 %}
 {#          Variable ansible_all_ipv6_addresses does not have any entries #}
-#           Variable ansible_all_ipv6_addresses does not have any entries
   ipv6_addresses: []
 {%       else %}
 {#          Variable ansible_all_ipv4_addresses has at least one entry #}
-#           Variable ansible_all_ipv4_addresses has at least one entry
   ipv6_addresses:
 {%          for ipv6_address in ansible_all_ipv6_addresses %}
   - "{{ ipv4_address }}"
@@ -167,23 +133,17 @@ ssh_key_data;
 {%       endif %}
 {%    else %}
 {#       Variable ssh_key_data.ipv6_addresses is not defined #}
-#        Variable ssh_key_data.ipv6_addresses is not defined
 {#       Variable ansible_all_ipv6_addresses is not defined #}
-#        Variable ansible_all_ipv6_addresses is not defined
   ipv6_addresses: []
 {%    endif %}
 {% elif ansible_all_ipv6_addresses is defined %}
 {#    Variable ssh_key_data is not defined #}
-#     Variable ssh_key_data is not defined
 {#    Variable ansible_all_ipv6_addresses is defined #}
-#     Variable ansible_all_ipv6_addresses is defined
 {%    if ansible_all_ipv6_addresses | length < 1 %}
 {#       Variable ansible_all_ipv6_addresses does not have any entries #}
-#        Variable ansible_all_ipv6_addresses does not have any entries
   ipv6_addresses: []
 {%    else %}
 {#       Variable ansible_all_ipv6_addresses has at least one entry #}
-#        Variable ansible_all_ipv6_addresses has at least one entry
   ipv6_addresses:
 {%       for ipv6_address in ansible_all_ipv6_addresses %}
   - "{{ ipv6_address }}"
@@ -191,7 +151,6 @@ ssh_key_data;
 {%    endif %}
 {% else %}
 {#    Variable ansible_all_ipv6_addresses is not defined #}
-#     Variable ansible_all_ipv6_addresses is not defined
   ipv6_addresses: []
 {% endif %}
 {#
@@ -202,7 +161,6 @@ ssh_key_data;
 #}
 {% if gather_facts_ssh_keys is defined %}
 {#    Variable gather_facts_ssh_keys is defined #}
-#     Variable gather_facts_ssh_keys is defined
   ssh_key_data:
 {%    for ssh_key in gather_facts_ssh_keys %}
   - ssh_key_type:  "{{ ssh_key.ssh_key_type }}"
