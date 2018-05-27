@@ -24,11 +24,11 @@
 
   - name: Set the groups output directory
     set_fact:
-      gather_facts_groups_dir: 'group-facts/'
+      gather_facts_group_facts_dir: 'group-facts/'
 
   - name: Ensure the groups output directory exists
     file:
-      path:      "{{ gather_facts_output_dir }}{{ gather_facts_groups_dir }}"
+      path:      "{{ gather_facts_output_dir }}{{ gather_facts_group_facts_dir }}"
       state:     directory
       recurse:   true
     connection:  local
@@ -39,8 +39,8 @@
 
 - name: Dump the group facts in YAML format
   template:
-    src:         host_facts_groups_yaml.j2
-    dest:        "{{ gather_facts_output_dir }}{{ gather_facts_groups_dir | default('') }}{{ inventory_hostname }}.groups.yaml"
+    src:         group-facts-yaml.j2
+    dest:        "{{ gather_facts_output_dir }}{{ gather_facts_group_facts_dir | default('') }}{{ inventory_hostname }}.groups.yaml"
   connection:    local
   become:        false
   ignore_errors: "{{ ansible_check_mode }}"

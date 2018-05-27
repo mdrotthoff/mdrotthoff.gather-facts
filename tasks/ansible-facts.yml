@@ -39,7 +39,7 @@
 
 - name: Dump the ansible facts in YAML format
   template:
-    src:         host_facts_groups_yaml.j2
+    src:         ansible-facts-yaml.j2
     dest:        "{{ gather_facts_output_dir }}{{ gather_facts_ansible_facts_dir | default('') }}{{ inventory_hostname }}.ansible-facts.yaml"
   connection:    local
   become:        false

@@ -39,7 +39,7 @@
 
 - name: Dump the environment facts in YAML format
   template:
-    src:         host_facts_environment_yaml.j2
+    src:         environment-facts-yaml.j2
     dest:        "{{ gather_facts_output_dir }}{{ gather_facts_environment_dir | default('') }}{{ inventory_hostname }}.environment.yaml"
   connection:    local
   become:        false

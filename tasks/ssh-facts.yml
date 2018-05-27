@@ -36,11 +36,11 @@
 
   - name: Set the SSH facts output directory
     set_fact:
-      gather_facts_ssh_keys_dir: 'ssh-keys/'
+      gather_facts_ssh_facts_dir: 'ssh-keys/'
 
   - name: Ensure the SSH keys output directory exists
     file:
-      path:      "{{ gather_facts_output_dir }}{{ gather_facts_ssh_keys_dir }}"
+      path:      "{{ gather_facts_output_dir }}{{ gather_facts_ssh_facts_dir }}"
       state:     directory
       recurse:   true
     connection:  local
@@ -51,8 +51,8 @@
 
 - name: Dump the SSH facts in YAML format
   template:
-    src:         host_facts_ssh_keys_yaml.j2
-    dest:        "{{ gather_facts_output_dir }}{{ gather_facts_ssh_keys_dir | default('') }}{{ inventory_hostname }}.ssh-keys.yaml"
+    src:         ssh-facts-yaml.j2
+    dest:        "{{ gather_facts_output_dir }}{{ gather_facts_ssh_facts_dir | default('') }}{{ inventory_hostname }}.ssh-keys.yaml"
   connection:    local
   become:        false
   ignore_errors: "{{ ansible_check_mode }}"

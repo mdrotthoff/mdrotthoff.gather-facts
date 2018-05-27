@@ -24,11 +24,11 @@
 
   - name: Set the host variables output directory
     set_fact:
-      gather_facts_host_vars_dir: 'host-facts/'
+      gather_facts_host_facts_dir: 'host-facts/'
 
   - name: Ensure the host variables output directory exists
     file:
-      path:      "{{ gather_facts_output_dir }}{{ gather_facts_host_vars_dir }}"
+      path:      "{{ gather_facts_output_dir }}{{ gather_facts_host_facts_dir }}"
       state:     directory
       recurse:   true
     connection:  local
@@ -39,8 +39,8 @@
 
 - name: Dump the host facts in YAML format
   template:
-    src:         host_facts_host_vars_yaml.j2
-    dest:        "{{ gather_facts_output_dir }}{{ gather_facts_host_vars_dir | default('') }}{{ inventory_hostname }}.host-vars.yaml"
+    src:         host-facts-yaml.j2
+    dest:        "{{ gather_facts_output_dir }}{{ gather_facts_host_facts_dir | default('') }}{{ inventory_hostname }}.host-vars.yaml"
   connection:    local
   become:        false
   ignore_errors: "{{ ansible_check_mode }}"
