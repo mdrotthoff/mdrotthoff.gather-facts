@@ -1,0 +1,22 @@
+---
+# $Author$
+# $Date$
+# $Source$
+
+- hosts:               all
+  become:              false
+  gather_facts:        true
+  max_fail_percentage: 34
+  serial:
+  - 1
+  - 3
+  vars:
+  - gather_facts_destination:          'facts/facts-host'
+  - gather_facts_directory_facts_type: false
+
+  tasks:
+  - name: Execute only the host-facts tasks
+    include_role:
+      name:             mdrotthoff.gather-facts
+      tasks_from:       host-facts.yml
+      allow_duplicates: true
