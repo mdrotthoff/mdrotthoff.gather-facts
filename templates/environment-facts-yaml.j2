@@ -1,5 +1,6 @@
 # {{ ansible_managed }}
+# Host: {{ ansible_fqdn }}
+---
 
-Environment Variables ("environment"):
---------------------------------
+# Environment facts:
 {{ ansible_env | to_nice_yaml }}

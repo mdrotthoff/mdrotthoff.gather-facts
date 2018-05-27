@@ -1,5 +1,6 @@
 # {{ ansible_managed }}
+# Host: {{ ansible_fqdn }}
+---
 
-HOST Variables ("hostvars"):
---------------------------------
+# Host facts:
 {{ hostvars[inventory_hostname] | to_nice_yaml }}

@@ -1,10 +1,10 @@
 # {{ ansible_managed }}
+# Host: {{ ansible_fqdn }}
+---
 
-GROUP NAMES Variables ("group_names"):
---------------------------------
+# Group names:
 {{ group_names | to_nice_yaml }}
 
 
-GROUPS Variables ("groups"):
---------------------------------
+# Groups:
 {{ groups | to_nice_yaml }}
