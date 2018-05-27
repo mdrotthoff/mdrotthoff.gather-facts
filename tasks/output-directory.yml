@@ -27,6 +27,13 @@
   tags:
   - gather_facts
 
+- name: Display the output directory name
+  debug:
+    var: gather_facts_output_dir
+  tags:
+  - debug
+  - never
+
 - name: Ensure the output directory exists
   file:
     path:      "{{ gather_facts_output_dir }}"
