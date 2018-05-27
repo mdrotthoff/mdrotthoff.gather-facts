@@ -3,8 +3,9 @@
   become:              false
   gather_facts:        true
   vars:
-  - gather_facts_destination:          'facts/facts-notypes'
+  - gather_facts_destination:          'facts/facts-nodomain'
   - gather_facts_directory_facts_type: false
+  - gather_facts_directory_domain:     false
 
   roles:
   - mdrotthoff.gather-facts
