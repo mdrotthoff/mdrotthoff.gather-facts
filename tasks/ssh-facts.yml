@@ -26,29 +26,35 @@
   connection:   local
   check_mode:   false
 
-- name: Display the ssh keys data gathered
+- name: Display the ssh keys data stdout lines
   debug:
-    var: gather_facts_ssh_key_data
-#  tags:
-#  - debug
-#  - never
+    var: gather_facts_ssh_key_data.stdout_lines
+  tags:
+  - debug
+  - never
 
-- name: Display the individual ssh keys gathered
+- name: Display the individual ssh keys output lines
   debug:
-    var: "{{ [ {'ssh_key_type': item.split(' ')[1], 'ssh_key_value': item.split(' ')[2]} ] }}"
+    msg: "{{ item }}"
   loop: "{{ gather_facts_ssh_key_data.stdout_lines }}"
-#  tags:
-#  - debug
-#  - never
+  tags:
+  - debug
+  - never
 
 - name: Collect the SSH keys found
   set_fact:
     gather_facts_ssh_keys: "{{ gather_facts_ssh_keys|default([]) + [ {'ssh_key_type': item.split(' ')[1], 'ssh_key_value': item.split(' ')[2]} ] }}"
   loop: "{{ gather_facts_ssh_key_data.stdout_lines }}"
 
+- name: Display the ssh keys gathered
+  debug:
+    var: gather_facts_ssh_keys
+  tags:
+  - debug
+  - never
+
 - name: Create the SSH facts subdirectory if requested
   block:
-
   - name: Set the SSH facts output directory
     set_fact:
       gather_facts_ssh_facts_dir: 'ssh-keys/'
@@ -60,6 +66,7 @@
       recurse:   true
     connection:  local
     become:      false
+
   when:
   - gather_facts_directory_facts_type is defined
   - gather_facts_directory_facts_type
