@@ -3,8 +3,26 @@
 ---
 
 # SSH Facts:
-ssh_key_data;
+ssh_key_data:
+{#
+   Start output the SSH host name
+#}
+{% if ssh_key_data is defined %}
+{#    Variable ssh_key_data is defined #}
+{%    if ssh_key_data.hostname is defined %}
+{#       Variable ssh_key_data.hostname is defined #}
+  hostname:  "{{ ssh_key_data.hostname }}"
+{%    else %}
+{#       Variable ssh_key_data.hostname is not defined #}
   hostname:  "{{ inventory_hostname }}"
+{%    endif %}
+{% else %}
+{#    Variable ssh_key_data is not defined #}
+  hostname:  "{{ inventory_hostname }}"
+{% endif %}
+{#
+   End output the SSH host name
+#}
 {#
    Start output the SSH host aliases
 #}
@@ -128,7 +146,7 @@ ssh_key_data;
 {#          Variable ansible_all_ipv4_addresses has at least one entry #}
   ipv6_addresses:
 {%          for ipv6_address in ansible_all_ipv6_addresses %}
-  - "{{ ipv4_address }}"
+  - "{{ ipv6_address }}"
 {%          endfor %}
 {%       endif %}
 {%    else %}
@@ -161,9 +179,9 @@ ssh_key_data;
 #}
 {% if gather_facts_ssh_keys is defined %}
 {#    Variable gather_facts_ssh_keys is defined #}
-  ssh_key_data:
+  key_data:
 {%    for ssh_key in gather_facts_ssh_keys %}
-  - ssh_key_type:  "{{ ssh_key.ssh_key_type }}"
-    ssh_key_value: "{{ ssh_key.ssh_key_value }}"
+  - enctype:     "{{ ssh_key.ssh_key_type }}"
+    fingerprint: "{{ ssh_key.ssh_key_value }}"
 {%    endfor %}
 {% endif %}
