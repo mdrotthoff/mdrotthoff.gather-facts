@@ -123,6 +123,24 @@ The following default variables are defined in defaults/main.yml.  All can be ov
     - Valid values: true or false
 
 
+* gather\_facts\_file\_owner
+    - Name of the OS user who should own the file.
+    - Default: Default Ansible user
+    - Valid values: Any valid OS user name
+
+
+* gather\_facts\_file\_group
+    - Name of the OS group who should own the file.
+    - Default: Default Ansible group
+    - Valid values: Any valid OS group name
+
+
+* gather\_facts\_file\_group
+    - OS file permissions to be applied to the file.
+    - Default: Default Ansible permissions
+    - Valid values: Any valid OS file permissions
+
+
 Dependencies
 ------------
 
