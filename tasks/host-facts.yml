@@ -8,7 +8,7 @@
 - name: Display the enter host-facts.yml message
   debug:
     msg: 'Enter host-facts.yml'
-  connection:    local
+  connection: local
   tags:
   - debug
   - never
@@ -26,34 +26,34 @@
   - name: Set the host variables output directory
     set_fact:
       gather_facts_host_facts_dir: 'host-facts/'
-    connection:    local
+    connection: local
 
   - name: Ensure the host variables output directory exists
     file:
-      path:      "{{ gather_facts_output_dir }}{{ gather_facts_host_facts_dir }}"
-      state:     directory
-      recurse:   true
-      owner:     "{{ gather_facts_file_owner | default(omit) }}"
-      group:     "{{ gather_facts_file_group | default(omit) }}"
-    connection:    local
+      path:    "{{ gather_facts_output_dir }}{{ gather_facts_host_facts_dir }}"
+      state:   directory
+      recurse: true
+      owner:   "{{ gather_facts_file_owner | default(omit) }}"
+      group:   "{{ gather_facts_file_group | default(omit) }}"
+    connection: local
   when:
   - gather_facts_directory_facts_type is defined
   - gather_facts_directory_facts_type
 
 - name: Dump the host facts in YAML format
   template:
-    src:         host-facts-yaml.j2
-    dest:        "{{ gather_facts_output_dir }}{{ gather_facts_host_facts_dir | default('') }}{{ inventory_hostname }}.host-vars.yaml"
-    owner:       "{{ gather_facts_file_owner | default(omit) }}"
-    group:       "{{ gather_facts_file_group | default(omit) }}"
-    mode:        "{{ gather_facts_file_mode | default(omit) }}"
-  connection:    local
+    src:   host-facts-yaml.j2
+    dest:  "{{ gather_facts_output_dir }}{{ gather_facts_host_facts_dir | default('') }}{{ inventory_hostname }}.host-vars.yaml"
+    owner: "{{ gather_facts_file_owner | default(omit) }}"
+    group: "{{ gather_facts_file_group | default(omit) }}"
+    mode:  "{{ gather_facts_file_mode | default(omit) }}"
+  connection: local
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Display the exit host-facts.yml message
   debug:
     msg: 'Exit host-facts.yml'
-  connection:    local
+  connection: local
   tags:
   - debug
   - never

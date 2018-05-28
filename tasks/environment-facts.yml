@@ -8,7 +8,7 @@
 - name: Display the enter environment-facts.yml message
   debug:
     msg: 'Enter environment-facts.yml'
-  connection:    local
+  connection: local
   tags:
   - debug
   - never
@@ -26,34 +26,34 @@
   - name: Set the environment output directory
     set_fact:
       gather_facts_environment_dir: 'environment-facts/'
-    connection:    local
+    connection: local
 
   - name: Ensure the environment output directory exists
     file:
-      path:      "{{ gather_facts_output_dir }}{{ gather_facts_environment_dir }}"
-      state:     directory
-      recurse:   true
-      owner:     "{{ gather_facts_file_owner | default(omit) }}"
-      group:     "{{ gather_facts_file_group | default(omit) }}"
-    connection:    local
+      path:    "{{ gather_facts_output_dir }}{{ gather_facts_environment_dir }}"
+      state:   directory
+      recurse: true
+      owner:   "{{ gather_facts_file_owner | default(omit) }}"
+      group:   "{{ gather_facts_file_group | default(omit) }}"
+    connection: local
   when:
   - gather_facts_directory_facts_type is defined
   - gather_facts_directory_facts_type
 
 - name: Dump the environment facts in YAML format
   template:
-    src:         environment-facts-yaml.j2
-    dest:        "{{ gather_facts_output_dir }}{{ gather_facts_environment_dir | default('') }}{{ inventory_hostname }}.environment.yaml"
-    owner:       "{{ gather_facts_file_owner | default(omit) }}"
-    group:       "{{ gather_facts_file_group | default(omit) }}"
-    mode:        "{{ gather_facts_file_mode | default(omit) }}"
-  connection:    local
+    src:   environment-facts-yaml.j2
+    dest:  "{{ gather_facts_output_dir }}{{ gather_facts_environment_dir | default('') }}{{ inventory_hostname }}.environment.yaml"
+    owner: "{{ gather_facts_file_owner | default(omit) }}"
+    group: "{{ gather_facts_file_group | default(omit) }}"
+    mode:  "{{ gather_facts_file_mode | default(omit) }}"
+  connection: local
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Display the exit environment-facts.yml message
   debug:
     msg: 'Exit environment-facts.yml'
-  connection:    local
+  connection: local
   tags:
   - debug
   - never

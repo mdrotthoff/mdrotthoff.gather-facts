@@ -8,7 +8,7 @@
 - name: Display the enter main.yml message
   debug:
     msg: 'Enter main.yml'
-  connection:    local
+  connection: local
   tags:
   - debug
   - never
@@ -61,6 +61,7 @@
 - name: Display the exit main.yml message
   debug:
     msg: 'Exit main.yml'
+  connection: local
   tags:
   - debug
   - never
