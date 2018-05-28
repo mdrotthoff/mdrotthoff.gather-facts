@@ -135,7 +135,7 @@ The following default variables are defined in defaults/main.yml.  All can be ov
     - Valid values: Any valid OS group name
 
 
-* gather\_facts\_file\_group
+* gather\_facts\_file\_mode
     - OS file permissions to be applied to the file.
     - Default: Default Ansible permissions
     - Valid values: Any valid OS file permissions
