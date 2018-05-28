@@ -8,6 +8,7 @@
 - name: Display the enter host-facts.yml message
   debug:
     msg: 'Enter host-facts.yml'
+  connection:    local
   tags:
   - debug
   - never
@@ -25,6 +26,7 @@
   - name: Set the host variables output directory
     set_fact:
       gather_facts_host_facts_dir: 'host-facts/'
+    connection:    local
 
   - name: Ensure the host variables output directory exists
     file:
@@ -33,7 +35,7 @@
       recurse:   true
       owner:     "{{ gather_facts_file_owner | default(omit) }}"
       group:     "{{ gather_facts_file_group | default(omit) }}"
-    connection:  local
+    connection:    local
     become:      false
   when:
   - gather_facts_directory_facts_type is defined
@@ -53,6 +55,7 @@
 - name: Display the exit host-facts.yml message
   debug:
     msg: 'Exit host-facts.yml'
+  connection:    local
   tags:
   - debug
   - never

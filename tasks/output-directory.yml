@@ -8,6 +8,7 @@
 - name: Display the enter output-directory.yml message
   debug:
     msg: 'Enter output-directory.yml'
+  connection:    local
   tags:
   - debug
   - never
@@ -15,6 +16,7 @@
 - name: Set the default domain directory (if requested)
   set_fact:
     gather_facts_domain_dir: "{{ ansible_domain }}/"
+  connection:    local
   when:
   - gather_facts_directory_domain is defined
   - gather_facts_directory_domain
@@ -24,12 +26,14 @@
 - name: Set the output directory
   set_fact:
     gather_facts_output_dir: "{{ gather_facts_destination | default('facts') }}/{{ gather_facts_domain_dir | default('') }}"
+  connection:    local
   tags:
   - gather_facts
 
 - name: Display the output directory name
   debug:
     var: gather_facts_output_dir
+  connection:    local
   tags:
   - debug
   - never
@@ -41,14 +45,14 @@
     recurse:   true
     owner:     "{{ gather_facts_file_owner | default(omit) }}"
     group:     "{{ gather_facts_file_group | default(omit) }}"
-  connection:  local
-  become:      false
+  connection:    local
   tags:
   - gather_facts
 
 - name: Display the exit output-directory.yml message
   debug:
     msg: 'Exit output-directory.yml'
+  connection:    local
   tags:
   - debug
   - never

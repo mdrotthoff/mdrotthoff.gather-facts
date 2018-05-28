@@ -8,6 +8,7 @@
 - name: Display the enter ansible-facts.yml message
   debug:
     msg: 'Enter ansible-facts.yml'
+  connection:    local
   tags:
   - debug
   - never
@@ -25,6 +26,7 @@
   - name: Set the ansible facts output directory
     set_fact:
       gather_facts_ansible_facts_dir: 'ansible-facts/'
+    connection:    local
 
   - name: Ensure the ansible facts output directory exists
     file:
@@ -33,7 +35,7 @@
       recurse:   true
       owner:     "{{ gather_facts_file_owner | default(omit) }}"
       group:     "{{ gather_facts_file_group | default(omit) }}"
-    connection:  local
+    connection:    local
     become:      false
   when:
   - gather_facts_directory_facts_type is defined
@@ -53,6 +55,7 @@
 - name: Display the exit ansible-facts.yml message
   debug:
     msg: 'Exit ansible-facts.yml'
+  connection:    local
   tags:
   - debug
   - never

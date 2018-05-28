@@ -8,6 +8,7 @@
 - name: Display the enter ssh-facts.yml message
   debug:
     msg: 'Enter ssh-facts.yml'
+  connection:    local
   tags:
   - debug
   - never
@@ -29,6 +30,7 @@
 - name: Display the ssh keys data stdout lines
   debug:
     var: gather_facts_ssh_key_data.stdout_lines
+  connection:    local
   tags:
   - debug
   - never
@@ -37,6 +39,7 @@
   debug:
     msg: "{{ item }}"
   loop: "{{ gather_facts_ssh_key_data.stdout_lines }}"
+  connection:    local
   tags:
   - debug
   - never
@@ -45,10 +48,12 @@
   set_fact:
     gather_facts_ssh_keys: "{{ gather_facts_ssh_keys|default([]) + [ {'enctype': item.split(' ')[1], 'fingerprint': item.split(' ')[2]} ] }}"
   loop: "{{ gather_facts_ssh_key_data.stdout_lines }}"
+  connection:    local
 
 - name: Display the ssh keys gathered
   debug:
     var: gather_facts_ssh_keys
+  connection:    local
   tags:
   - debug
   - never
@@ -58,6 +63,7 @@
   - name: Set the SSH facts output directory
     set_fact:
       gather_facts_ssh_facts_dir: 'ssh-keys/'
+    connection:    local
 
   - name: Ensure the SSH keys output directory exists
     file:
@@ -66,7 +72,7 @@
       recurse:   true
       owner:     "{{ gather_facts_file_owner | default(omit) }}"
       group:     "{{ gather_facts_file_group | default(omit) }}"
-    connection:  local
+    connection:    local
     become:      false
 
   when:
@@ -87,6 +93,7 @@
 - name: Display the exit ssh-facts.yml message
   debug:
     msg: 'Exit ssh-facts.yml'
+  connection:    local
   tags:
   - debug
   - never

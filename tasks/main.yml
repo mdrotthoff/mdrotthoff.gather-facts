@@ -8,6 +8,7 @@
 - name: Display the enter main.yml message
   debug:
     msg: 'Enter main.yml'
+  connection:    local
   tags:
   - debug
   - never
