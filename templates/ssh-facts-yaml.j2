@@ -181,7 +181,7 @@ ssh_key_data:
 {#    Variable gather_facts_ssh_keys is defined #}
   key_data:
 {%    for ssh_key in gather_facts_ssh_keys %}
-  - enctype:     "{{ ssh_key.ssh_key_type }}"
-    fingerprint: "{{ ssh_key.ssh_key_value }}"
+  - enctype:     "{{ ssh_key.enctype }}"
+    fingerprint: "{{ ssh_key.fingerprint }}"
 {%    endfor %}
 {% endif %}

@@ -43,7 +43,7 @@
 
 - name: Collect the SSH keys found
   set_fact:
-    gather_facts_ssh_keys: "{{ gather_facts_ssh_keys|default([]) + [ {'ssh_key_type': item.split(' ')[1], 'ssh_key_value': item.split(' ')[2]} ] }}"
+    gather_facts_ssh_keys: "{{ gather_facts_ssh_keys|default([]) + [ {'enctype': item.split(' ')[1], 'fingerprint': item.split(' ')[2]} ] }}"
   loop: "{{ gather_facts_ssh_key_data.stdout_lines }}"
 
 - name: Display the ssh keys gathered
@@ -64,6 +64,8 @@
       path:      "{{ gather_facts_output_dir }}{{ gather_facts_ssh_facts_dir }}"
       state:     directory
       recurse:   true
+      owner:     "{{ gather_facts_file_owner | default(omit) }}"
+      group:     "{{ gather_facts_file_group | default(omit) }}"
     connection:  local
     become:      false
 
@@ -75,6 +77,9 @@
   template:
     src:         ssh-facts-yaml.j2
     dest:        "{{ gather_facts_output_dir }}{{ gather_facts_ssh_facts_dir | default('') }}{{ inventory_hostname }}.ssh-keys.yaml"
+    owner:       "{{ gather_facts_file_owner | default(omit) }}"
+    group:       "{{ gather_facts_file_group | default(omit) }}"
+    mode:        "{{ gather_facts_file_mode | default(omit) }}"
   connection:    local
   become:        false
   ignore_errors: "{{ ansible_check_mode }}"
