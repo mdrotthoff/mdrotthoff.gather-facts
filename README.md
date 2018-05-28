@@ -76,44 +76,52 @@ Role Variables
 The following default variables are defined in defaults/main.yml.  All can be over-ridden at the user's option:
 
 * gather\_facts\_destination
+    - Base output directory where the output fact files should be written.
+    - Default: 'facts'
+    - Valid values: Any valid subdirectory name
 
-  Base output directory where the output fact files should be written.
-  Default: 'facts'
 
 * gather\_facts\_directory\_domain
+    - Boolean value as to whether or not the output fact files should be broken up into sub-directories based on the host domain name.
+    - Default: true
+    - Valid values: true or false
 
-  True / false value as to whether or not the output fact files should be broken up into sub-directories based on the host domain name.
-  Default: true
 
 * gather\_facts\_directory\_facts\_type
+    - Boolean value as to whether or not the the various output files should be placed in sub-directories based on the type of fact being output.
+    - Default: true
+    - Valid values: true or false
 
-  True / false value as to whether or not the the various output files should be placed in sub-directories based on the type of fact being output.
-  Default: true
 
 * gather\_facts\_ansible\_vars\_facts
+    - Boolean value as to whether or not the Ansible facts should be output.
+    - Default: true
+    - Valid values: true or false
 
-  True / false value as to whether or not the Ansible facts should be output.
-  Default: true
 
-* gather\_facts\_ssh_keys\_facts
+* gather\_facts\_ssh\_keys\_facts
+    - Boolean value as to whether or not the Ansible facts should be output.
+    - Default: true
+    - Valid values: true or false
 
-  True / false value as to whether or not the Ansible facts should be output.
-  Default: true
 
 * gather\_facts\_host\_vars\_facts
+    - Boolean value as to whether or not the Ansible host variables should be output.
+    - Default: true
+    - Valid values: true or false
 
-  True / false value as to whether or not the Ansible host variables should be output.
-  Default: true
 
 * gather\_facts\_environment\_facts
+    - Boolean value as to whether or not the host environment variables should be output.
+    - Default: true
+    - Valid values: true or false
 
-  True / false value as to whether or not the host environment variables should be output.
-  Default: true
 
 * gather\_facts\_group\_facts
+    - Boolean value as to whether or not the group informations should be output.
+    - Default: true
+    - Valid values: true or false
 
-  True / false value as to whether or not the group informations should be output.
-  Default: true
 
 Dependencies
 ------------
