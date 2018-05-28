@@ -42,20 +42,36 @@ Using the established defaults, the role will output five YAML files for each ho
 
 Various defaults may be over-ridden which can be used to alter the directory structure used for the output.
 
-**Notes:**
-* The SSH key facts being output look for a predefined host variable named ssh\_key\_data structured in the format being output by this role.  If it is found, any sub-variables within the definition are retained as a part of the generated output.  This allows the various parts to be over-ridden at a host level as desired.  This does **NOT** apply to the SSH key types and finger prints being output.  Those are always output based on the results of the ssh-keyscan results!
+**Notes 1:** The SSH key facts being output look for a predefined host variable named ssh\_key\_data structured in the format being output by this role.  If it is found, any sub-variables within the definition are retained as a part of the generated output.  This allows the various parts to be over-ridden at a host level as desired.  This does **NOT** apply to the SSH key types and finger prints being output.  Those are always output based on the results of the ssh-keyscan results!
 
-* The base output directory is calculated when the first output file is generated.  Subsequent output files will continue to use the same base output directory for the execution of the current play.
+**Notes 2:**  The base output directory is calculated when the first output file is generated.  Subsequent output files will continue to use the same base output directory for the execution of the current play.
+
+**Notes 3:**  SSH key facts are output in the following structure which is particularly suitable for adding to host variable definitions:
+
+      ssh_key_data:
+        hostname:  "localhost.workstation.rotthoff.home"
+        host_aliases:
+        - localhost
+        ipv4_addresses:
+        - "192.168.35.100"
+        ipv6_addresses:
+        - "fd30:8855:cad5::1:1:100"
+        key_data:
+        - enctype:     "ssh-rsa"
+          fingerprint: "AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgt91wPR+/E5Ltifm4DLP3E2neI43G5Z47c84uP4F1MatjomPM6tzFyOJuduNPomWmAj5dgTm0lm+2dK9ORD+sNmCyCH29uZSctN7rjFv4n3D597+2GH6aeWJUujCXn71/X3ao+Znk5agYZjhKCiPIwMFT/Ylq0nX27DbUApt/dmPmoYFFxPgyJrPqVMgSdZ4uU6IIUFPwyX1+BZTdVfTIS8iEYKX+eP2RwKMlpSq7Fv6bSZls0nYFTDxfthCUdT2KiE0KfMsn3BcfJt2Uyk4yDxdn4x6JhDq2Gxc4Q4iqTgowk5hbkBPdj6daCnOioGCNLOVCZnuOVv7Fh8hvsQN"
+        - enctype:     "ecdsa-sha2-nistp256"
+          fingerprint: "AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLFj4TXqgul7JJFzJif8uSXkv/uHVSLHR135E5JToysmDlV16na8WiTtmN6dJbVPmLK5ROBkJou51IphfkKPZIU="
+        - enctype:     "ssh-ed25519"
+          fingerprint: "AAAAC3NzaC1lZDI1NTE5AAAAIEQ+m5vc6nkgTx0AqTOULKxHz1gigCxWHYtvj6t1ogLl"
+
 
 Requirements
 ------------
 
-This role depends on the ssh-keyscan utility being available on the Ansible controller server.
+This role depends on the ssh-keyscan utility being available on the Ansible controller.
 
 Role Variables
 --------------
-
-A description of the settable variables for this role should go here, including any variables that are in defaults/main.yml, vars/main.yml, and any variables that can/should be set via parameters to the role. Any variables that are read from other roles and/or the global scope (ie. hostvars, group vars, etc.) should be mentioned here as well.
 
 The following default variables are defined in defaults/main.yml.  All can be over-ridden at the user's option:
 
