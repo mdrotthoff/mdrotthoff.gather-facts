@@ -30,5 +30,7 @@ for play in $(ls gather-facts*.yml) ; do
   echo "" >> test.log
   echo "**** Resulting directory tree ****" >> test.log
   tree facts >> test.log
+  echo "" >> test.log
+  ls -laR facts >> test.log
 done
 

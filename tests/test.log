@@ -337,9 +337,9 @@ TASK [mdrotthoff.gather-facts : Scan and register the host ssh keys] ***********
 ok: [localhost]
 
 TASK [mdrotthoff.gather-facts : Collect the SSH keys found] ********************
-ok: [localhost] => (item=workstation.rotthoff.home ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgt91wPR+/E5Ltifm4DLP3E2neI43G5Z47c84uP4F1MatjomPM6tzFyOJuduNPomWmAj5dgTm0lm+2dK9ORD+sNmCyCH29uZSctN7rjFv4n3D597+2GH6aeWJUujCXn71/X3ao+Znk5agYZjhKCiPIwMFT/Ylq0nX27DbUApt/dmPmoYFFxPgyJrPqVMgSdZ4uU6IIUFPwyX1+BZTdVfTIS8iEYKX+eP2RwKMlpSq7Fv6bSZls0nYFTDxfthCUdT2KiE0KfMsn3BcfJt2Uyk4yDxdn4x6JhDq2Gxc4Q4iqTgowk5hbkBPdj6daCnOioGCNLOVCZnuOVv7Fh8hvsQN)
 ok: [localhost] => (item=workstation.rotthoff.home ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLFj4TXqgul7JJFzJif8uSXkv/uHVSLHR135E5JToysmDlV16na8WiTtmN6dJbVPmLK5ROBkJou51IphfkKPZIU=)
 ok: [localhost] => (item=workstation.rotthoff.home ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQ+m5vc6nkgTx0AqTOULKxHz1gigCxWHYtvj6t1ogLl)
+ok: [localhost] => (item=workstation.rotthoff.home ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgt91wPR+/E5Ltifm4DLP3E2neI43G5Z47c84uP4F1MatjomPM6tzFyOJuduNPomWmAj5dgTm0lm+2dK9ORD+sNmCyCH29uZSctN7rjFv4n3D597+2GH6aeWJUujCXn71/X3ao+Znk5agYZjhKCiPIwMFT/Ylq0nX27DbUApt/dmPmoYFFxPgyJrPqVMgSdZ4uU6IIUFPwyX1+BZTdVfTIS8iEYKX+eP2RwKMlpSq7Fv6bSZls0nYFTDxfthCUdT2KiE0KfMsn3BcfJt2Uyk4yDxdn4x6JhDq2Gxc4Q4iqTgowk5hbkBPdj6daCnOioGCNLOVCZnuOVv7Fh8hvsQN)
 
 TASK [mdrotthoff.gather-facts : Set the SSH facts output directory] ************
 skipping: [localhost]
@@ -525,13 +525,13 @@ TASK [mdrotthoff.gather-facts : Set the output directory] **********************
 ok: [localhost]
 
 TASK [mdrotthoff.gather-facts : Ensure the output directory exists] ************
-ok: [localhost]
+changed: [localhost]
 
 TASK [mdrotthoff.gather-facts : Set the environment output directory] **********
 ok: [localhost]
 
 TASK [mdrotthoff.gather-facts : Ensure the environment output directory exists] ***
-ok: [localhost]
+changed: [localhost]
 
 TASK [mdrotthoff.gather-facts : Dump the environment facts in YAML format] *****
 changed: [localhost]
@@ -546,10 +546,10 @@ TASK [mdrotthoff.gather-facts : Set the groups output directory] ***************
 ok: [localhost]
 
 TASK [mdrotthoff.gather-facts : Ensure the groups output directory exists] *****
-ok: [localhost]
+changed: [localhost]
 
 TASK [mdrotthoff.gather-facts : Dump the group facts in YAML format] ***********
-ok: [localhost]
+changed: [localhost]
 
 TASK [mdrotthoff.gather-facts : Output the host facts if requested] ************
 included: /home/mdrotthoff/workspaces/mdrotthoff.ansible/ansible/roles/mdrotthoff.gather-facts/tasks/host-facts.yml for localhost
@@ -561,7 +561,7 @@ TASK [mdrotthoff.gather-facts : Set the host variables output directory] *******
 ok: [localhost]
 
 TASK [mdrotthoff.gather-facts : Ensure the host variables output directory exists] ***
-ok: [localhost]
+changed: [localhost]
 
 TASK [mdrotthoff.gather-facts : Dump the host facts in YAML format] ************
 changed: [localhost]
@@ -576,7 +576,7 @@ TASK [mdrotthoff.gather-facts : Set the ansible facts output directory] ********
 ok: [localhost]
 
 TASK [mdrotthoff.gather-facts : Ensure the ansible facts output directory exists] ***
-ok: [localhost]
+changed: [localhost]
 
 TASK [mdrotthoff.gather-facts : Dump the ansible facts in YAML format] *********
 changed: [localhost]
@@ -599,13 +599,13 @@ TASK [mdrotthoff.gather-facts : Set the SSH facts output directory] ************
 ok: [localhost]
 
 TASK [mdrotthoff.gather-facts : Ensure the SSH keys output directory exists] ***
-ok: [localhost]
+changed: [localhost]
 
 TASK [mdrotthoff.gather-facts : Dump the SSH facts in YAML format] *************
-ok: [localhost]
+changed: [localhost]
 
 PLAY RECAP *********************************************************************
-localhost                  : ok=27   changed=3    unreachable=0    failed=0   
+localhost                  : ok=27   changed=11   unreachable=0    failed=0   
 
 
 
@@ -655,6 +655,24 @@ facts
 
 2 directories, 1 file
 
+facts:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 facts-ansible
+
+facts/facts-ansible:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 rotthoff.home
+
+facts/facts-ansible/rotthoff.home:
+total 232
+drwxrwxr-x. 2 mdrotthoff mdrotthoff   4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff   4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 226839 May 28 17:22 localhost.ansible-facts.yaml
+
 
 **** Executing playbook gather-facts-enviroment.yml (full mode) ****
 
@@ -698,6 +716,24 @@ facts
         └── localhost.environment.yaml
 
 2 directories, 1 file
+
+facts:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 facts-environment
+
+facts/facts-environment:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 rotthoff.home
+
+facts/facts-environment/rotthoff.home:
+total 12
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 3211 May 28 17:22 localhost.environment.yaml
 
 
 **** Executing playbook gather-facts-group.yml (full mode) ****
@@ -743,6 +779,24 @@ facts
 
 2 directories, 1 file
 
+facts:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 facts-group
+
+facts/facts-group:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 rotthoff.home
+
+facts/facts-group/rotthoff.home:
+total 12
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff  137 May 28 17:22 localhost.groups.yaml
+
 
 **** Executing playbook gather-facts-host.yml (full mode) ****
 
@@ -786,6 +840,24 @@ facts
         └── localhost.host-vars.yaml
 
 2 directories, 1 file
+
+facts:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 facts-host
+
+facts/facts-host:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 rotthoff.home
+
+facts/facts-host/rotthoff.home:
+total 108
+drwxrwxr-x. 2 mdrotthoff mdrotthoff   4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff   4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 101135 May 28 17:22 localhost.host-vars.yaml
 
 
 **** Executing playbook gather-facts-nodomain.yml (full mode) ****
@@ -902,6 +974,22 @@ facts
     └── localhost.ssh-keys.yaml
 
 1 directory, 5 files
+
+facts:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 facts-nodomain
+
+facts/facts-nodomain:
+total 344
+drwxrwxr-x. 2 mdrotthoff mdrotthoff   4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff   4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 226667 May 28 17:22 localhost.ansible-facts.yaml
+-rw-rw-r--. 1 mdrotthoff mdrotthoff   3211 May 28 17:22 localhost.environment.yaml
+-rw-rw-r--. 1 mdrotthoff mdrotthoff    137 May 28 17:22 localhost.groups.yaml
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 101085 May 28 17:22 localhost.host-vars.yaml
+-rw-rw-r--. 1 mdrotthoff mdrotthoff   1090 May 28 17:22 localhost.ssh-keys.yaml
 
 
 **** Executing playbook gather-facts-notypes.yml (full mode) ****
@@ -1020,6 +1108,28 @@ facts
 
 2 directories, 5 files
 
+facts:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 facts-notypes
+
+facts/facts-notypes:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 rotthoff.home
+
+facts/facts-notypes/rotthoff.home:
+total 344
+drwxrwxr-x. 2 mdrotthoff mdrotthoff   4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff   4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 226779 May 28 17:22 localhost.ansible-facts.yaml
+-rw-rw-r--. 1 mdrotthoff mdrotthoff   3211 May 28 17:22 localhost.environment.yaml
+-rw-rw-r--. 1 mdrotthoff mdrotthoff    137 May 28 17:22 localhost.groups.yaml
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 101138 May 28 17:22 localhost.host-vars.yaml
+-rw-rw-r--. 1 mdrotthoff mdrotthoff   1090 May 28 17:22 localhost.ssh-keys.yaml
+
 
 **** Executing playbook gather-facts-ssh.yml (full mode) ****
 
@@ -1048,8 +1158,8 @@ ok: [localhost]
 
 TASK [mdrotthoff.gather-facts : Collect the SSH keys found] ********************
 ok: [localhost] => (item=workstation.rotthoff.home ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgt91wPR+/E5Ltifm4DLP3E2neI43G5Z47c84uP4F1MatjomPM6tzFyOJuduNPomWmAj5dgTm0lm+2dK9ORD+sNmCyCH29uZSctN7rjFv4n3D597+2GH6aeWJUujCXn71/X3ao+Znk5agYZjhKCiPIwMFT/Ylq0nX27DbUApt/dmPmoYFFxPgyJrPqVMgSdZ4uU6IIUFPwyX1+BZTdVfTIS8iEYKX+eP2RwKMlpSq7Fv6bSZls0nYFTDxfthCUdT2KiE0KfMsn3BcfJt2Uyk4yDxdn4x6JhDq2Gxc4Q4iqTgowk5hbkBPdj6daCnOioGCNLOVCZnuOVv7Fh8hvsQN)
-ok: [localhost] => (item=workstation.rotthoff.home ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLFj4TXqgul7JJFzJif8uSXkv/uHVSLHR135E5JToysmDlV16na8WiTtmN6dJbVPmLK5ROBkJou51IphfkKPZIU=)
 ok: [localhost] => (item=workstation.rotthoff.home ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQ+m5vc6nkgTx0AqTOULKxHz1gigCxWHYtvj6t1ogLl)
+ok: [localhost] => (item=workstation.rotthoff.home ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLFj4TXqgul7JJFzJif8uSXkv/uHVSLHR135E5JToysmDlV16na8WiTtmN6dJbVPmLK5ROBkJou51IphfkKPZIU=)
 
 TASK [mdrotthoff.gather-facts : Set the SSH facts output directory] ************
 skipping: [localhost]
@@ -1071,6 +1181,24 @@ facts
         └── localhost.ssh-keys.yaml
 
 2 directories, 1 file
+
+facts:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 facts-ssh
+
+facts/facts-ssh:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 rotthoff.home
+
+facts/facts-ssh/rotthoff.home:
+total 12
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 1090 May 28 17:22 localhost.ssh-keys.yaml
 
 
 **** Executing playbook gather-facts-types.yml (full mode) ****
@@ -1160,8 +1288,8 @@ TASK [mdrotthoff.gather-facts : Scan and register the host ssh keys] ***********
 ok: [localhost]
 
 TASK [mdrotthoff.gather-facts : Collect the SSH keys found] ********************
-ok: [localhost] => (item=workstation.rotthoff.home ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLFj4TXqgul7JJFzJif8uSXkv/uHVSLHR135E5JToysmDlV16na8WiTtmN6dJbVPmLK5ROBkJou51IphfkKPZIU=)
 ok: [localhost] => (item=workstation.rotthoff.home ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgt91wPR+/E5Ltifm4DLP3E2neI43G5Z47c84uP4F1MatjomPM6tzFyOJuduNPomWmAj5dgTm0lm+2dK9ORD+sNmCyCH29uZSctN7rjFv4n3D597+2GH6aeWJUujCXn71/X3ao+Znk5agYZjhKCiPIwMFT/Ylq0nX27DbUApt/dmPmoYFFxPgyJrPqVMgSdZ4uU6IIUFPwyX1+BZTdVfTIS8iEYKX+eP2RwKMlpSq7Fv6bSZls0nYFTDxfthCUdT2KiE0KfMsn3BcfJt2Uyk4yDxdn4x6JhDq2Gxc4Q4iqTgowk5hbkBPdj6daCnOioGCNLOVCZnuOVv7Fh8hvsQN)
+ok: [localhost] => (item=workstation.rotthoff.home ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLFj4TXqgul7JJFzJif8uSXkv/uHVSLHR135E5JToysmDlV16na8WiTtmN6dJbVPmLK5ROBkJou51IphfkKPZIU=)
 ok: [localhost] => (item=workstation.rotthoff.home ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQ+m5vc6nkgTx0AqTOULKxHz1gigCxWHYtvj6t1ogLl)
 
 TASK [mdrotthoff.gather-facts : Set the SSH facts output directory] ************
@@ -1193,6 +1321,58 @@ facts
             └── localhost.ssh-keys.yaml
 
 7 directories, 5 files
+
+facts:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 facts-types
+
+facts/facts-types:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 7 mdrotthoff mdrotthoff 4096 May 28 17:22 rotthoff.home
+
+facts/facts-types/rotthoff.home:
+total 28
+drwxrwxr-x. 7 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 ansible-facts
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 environment-facts
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 group-facts
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 host-facts
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 ssh-keys
+
+facts/facts-types/rotthoff.home/ansible-facts:
+total 240
+drwxrwxr-x. 2 mdrotthoff mdrotthoff   4096 May 28 17:22 .
+drwxrwxr-x. 7 mdrotthoff mdrotthoff   4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 234860 May 28 17:22 localhost.ansible-facts.yaml
+
+facts/facts-types/rotthoff.home/environment-facts:
+total 12
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 7 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 3180 May 28 17:22 localhost.environment.yaml
+
+facts/facts-types/rotthoff.home/group-facts:
+total 12
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 7 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff  137 May 28 17:22 localhost.groups.yaml
+
+facts/facts-types/rotthoff.home/host-facts:
+total 112
+drwxrwxr-x. 2 mdrotthoff mdrotthoff   4096 May 28 17:22 .
+drwxrwxr-x. 7 mdrotthoff mdrotthoff   4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 104525 May 28 17:22 localhost.host-vars.yaml
+
+facts/facts-types/rotthoff.home/ssh-keys:
+total 12
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 7 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 1090 May 28 17:22 localhost.ssh-keys.yaml
 
 
 **** Executing playbook gather-facts.yml (full mode) ****
@@ -1282,9 +1462,9 @@ TASK [mdrotthoff.gather-facts : Scan and register the host ssh keys] ***********
 ok: [localhost]
 
 TASK [mdrotthoff.gather-facts : Collect the SSH keys found] ********************
-ok: [localhost] => (item=workstation.rotthoff.home ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgt91wPR+/E5Ltifm4DLP3E2neI43G5Z47c84uP4F1MatjomPM6tzFyOJuduNPomWmAj5dgTm0lm+2dK9ORD+sNmCyCH29uZSctN7rjFv4n3D597+2GH6aeWJUujCXn71/X3ao+Znk5agYZjhKCiPIwMFT/Ylq0nX27DbUApt/dmPmoYFFxPgyJrPqVMgSdZ4uU6IIUFPwyX1+BZTdVfTIS8iEYKX+eP2RwKMlpSq7Fv6bSZls0nYFTDxfthCUdT2KiE0KfMsn3BcfJt2Uyk4yDxdn4x6JhDq2Gxc4Q4iqTgowk5hbkBPdj6daCnOioGCNLOVCZnuOVv7Fh8hvsQN)
 ok: [localhost] => (item=workstation.rotthoff.home ecdsa-sha2-nistp256 AAAAE2VjZHNhLXNoYTItbmlzdHAyNTYAAAAIbmlzdHAyNTYAAABBBLFj4TXqgul7JJFzJif8uSXkv/uHVSLHR135E5JToysmDlV16na8WiTtmN6dJbVPmLK5ROBkJou51IphfkKPZIU=)
 ok: [localhost] => (item=workstation.rotthoff.home ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEQ+m5vc6nkgTx0AqTOULKxHz1gigCxWHYtvj6t1ogLl)
+ok: [localhost] => (item=workstation.rotthoff.home ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDYgt91wPR+/E5Ltifm4DLP3E2neI43G5Z47c84uP4F1MatjomPM6tzFyOJuduNPomWmAj5dgTm0lm+2dK9ORD+sNmCyCH29uZSctN7rjFv4n3D597+2GH6aeWJUujCXn71/X3ao+Znk5agYZjhKCiPIwMFT/Ylq0nX27DbUApt/dmPmoYFFxPgyJrPqVMgSdZ4uU6IIUFPwyX1+BZTdVfTIS8iEYKX+eP2RwKMlpSq7Fv6bSZls0nYFTDxfthCUdT2KiE0KfMsn3BcfJt2Uyk4yDxdn4x6JhDq2Gxc4Q4iqTgowk5hbkBPdj6daCnOioGCNLOVCZnuOVv7Fh8hvsQN)
 
 TASK [mdrotthoff.gather-facts : Set the SSH facts output directory] ************
 ok: [localhost]
@@ -1314,3 +1494,49 @@ facts
         └── localhost.ssh-keys.yaml
 
 6 directories, 5 files
+
+facts:
+total 12
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 7 mdrotthoff mdrotthoff 4096 May 28 17:22 rotthoff.home
+
+facts/rotthoff.home:
+total 28
+drwxrwxr-x. 7 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 3 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 ansible-facts
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 environment-facts
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 group-facts
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 host-facts
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 ssh-keys
+
+facts/rotthoff.home/ansible-facts:
+total 232
+drwxrwxr-x. 2 mdrotthoff mdrotthoff   4096 May 28 17:22 .
+drwxrwxr-x. 7 mdrotthoff mdrotthoff   4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 227128 May 28 17:22 localhost.ansible-facts.yaml
+
+facts/rotthoff.home/environment-facts:
+total 12
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 7 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 3211 May 28 17:22 localhost.environment.yaml
+
+facts/rotthoff.home/group-facts:
+total 12
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 7 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff  137 May 28 17:22 localhost.groups.yaml
+
+facts/rotthoff.home/host-facts:
+total 108
+drwxrwxr-x. 2 mdrotthoff mdrotthoff   4096 May 28 17:22 .
+drwxrwxr-x. 7 mdrotthoff mdrotthoff   4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 101257 May 28 17:22 localhost.host-vars.yaml
+
+facts/rotthoff.home/ssh-keys:
+total 12
+drwxrwxr-x. 2 mdrotthoff mdrotthoff 4096 May 28 17:22 .
+drwxrwxr-x. 7 mdrotthoff mdrotthoff 4096 May 28 17:22 ..
+-rw-rw-r--. 1 mdrotthoff mdrotthoff 1090 May 28 17:22 localhost.ssh-keys.yaml
