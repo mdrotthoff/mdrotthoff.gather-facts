@@ -137,4 +137,4 @@ Additional examples of how the role can be used can be found within the tests fo
 License
 -------
 
-BSD
+MIT
