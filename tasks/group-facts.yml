@@ -31,6 +31,8 @@
       path:      "{{ gather_facts_output_dir }}{{ gather_facts_group_facts_dir }}"
       state:     directory
       recurse:   true
+      owner:     "{{ gather_facts_file_owner | default(omit) }}"
+      group:     "{{ gather_facts_file_group | default(omit) }}"
     connection:  local
     become:      false
   when:
@@ -41,6 +43,9 @@
   template:
     src:         group-facts-yaml.j2
     dest:        "{{ gather_facts_output_dir }}{{ gather_facts_group_facts_dir | default('') }}{{ inventory_hostname }}.groups.yaml"
+    owner:       "{{ gather_facts_file_owner | default(omit) }}"
+    group:       "{{ gather_facts_file_group | default(omit) }}"
+    mode:        "{{ gather_facts_file_mode | default(omit) }}"
   connection:    local
   become:        false
   ignore_errors: "{{ ansible_check_mode }}"

@@ -39,6 +39,8 @@
     path:      "{{ gather_facts_output_dir }}"
     state:     directory
     recurse:   true
+    owner:     "{{ gather_facts_file_owner | default(omit) }}"
+    group:     "{{ gather_facts_file_group | default(omit) }}"
   connection:  local
   become:      false
   tags:

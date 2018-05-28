@@ -12,3 +12,6 @@ gather_facts_ansible_vars_facts:   true
 gather_facts_ssh_keys_facts:       true
 gather_facts_environment_facts:    true
 gather_facts_group_facts:          true
+#gather_facts_file_owner:           'mdrotthoff'
+#gather_facts_file_group:           'ansible'
+#gather_facts_file_mode:            '0664'
