@@ -73,7 +73,6 @@
       owner:     "{{ gather_facts_file_owner | default(omit) }}"
       group:     "{{ gather_facts_file_group | default(omit) }}"
     connection:    local
-    become:      false
 
   when:
   - gather_facts_directory_facts_type is defined
@@ -87,7 +86,6 @@
     group:       "{{ gather_facts_file_group | default(omit) }}"
     mode:        "{{ gather_facts_file_mode | default(omit) }}"
   connection:    local
-  become:        false
   ignore_errors: "{{ ansible_check_mode }}"
 
 - name: Display the exit ssh-facts.yml message
